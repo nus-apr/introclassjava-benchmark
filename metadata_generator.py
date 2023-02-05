@@ -4,39 +4,44 @@ from pprint import pprint
 import shutil
 import json
 
-id =0
+id = 0
 result = []
 
 
 if not os.path.exists("programs"):
     os.mkdir("programs")
 
-for project in os.listdir('dataset'): 
-    print('Starting {}'.format(project))
-    for child in os.listdir(join('dataset',project)):
-        print('Child is dataset/{}/{}'.format(project,child))
-        for subchild in os.listdir(join('dataset',project,child)):
-            print('Subhild is dataset/{}/{}/{}'.format(project,child,subchild))
+for project in os.listdir("dataset"):
+    print("Starting {}".format(project))
+    for child in os.listdir(join("dataset", project)):
+        print("Child is dataset/{}/{}".format(project, child))
+        for subchild in os.listdir(join("dataset", project, child)):
+            print("Subhild is dataset/{}/{}/{}".format(project, child, subchild))
             id += 1
-            short_name =  "{}-{}".format(project,child[0:6])
-            result.append({
-                "id": id,
-                "bug_id": subchild,
-                "subject": short_name,
-                "source_file": '{}_{}_{}'.format(project,child[9:8],subchild),
-                "source_directory": "src/main/java",
-                "class_directory": "target/classes",
-                "line_numbers": [],
-                "dependencies": [],
-                "passing_test": [],
-                "failing_test": [],
-                "test_directory": "src/test/java",
-                "test_class_directory": "target/test-classes",
-                "count_pos": 0,
-                "count_neg": 0,
-                "test_timeout": 5,
-            })
-            shutil.copytree(join('dataset',project,child,subchild),join('programs',short_name,subchild ))
+            short_name = "{}-{}".format(project, child[0:6])
+            result.append(
+                {
+                    "id": id,
+                    "bug_id": subchild,
+                    "subject": short_name,
+                    "source_file": "{}_{}_{}".format(project, child[9:8], subchild),
+                    "source_directory": "src/main/java",
+                    "class_directory": "target/classes",
+                    "line_numbers": [],
+                    "dependencies": [],
+                    "passing_test": [],
+                    "failing_test": [],
+                    "test_directory": "src/test/java",
+                    "test_class_directory": "target/test-classes",
+                    "count_pos": 0,
+                    "count_neg": 0,
+                    "test_timeout": 5,
+                }
+            )
+            shutil.copytree(
+                join("dataset", project, child, subchild),
+                join("programs", short_name, subchild),
+            )
 
 x = open("meta-data.json", "w")
 x.write(json.dumps(result, indent=4))
