@@ -1,4 +1,5 @@
 package introclassJava;
+
 class DoubleObj {
     public double value;
     public DoubleObj () {
