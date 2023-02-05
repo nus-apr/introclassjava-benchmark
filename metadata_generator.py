@@ -8,9 +8,6 @@ id = 0
 result = []
 
 
-if not os.path.exists("programs"):
-    os.mkdir("programs")
-
 for project in os.listdir("dataset"):
     print("Starting {}".format(project))
     for child in os.listdir(join("dataset", project)):
@@ -24,7 +21,7 @@ for project in os.listdir("dataset"):
                     "id": id,
                     "bug_id": subchild,
                     "subject": short_name,
-                    "source_file": "{}_{}_{}".format(project, child[9:8], subchild),
+                    "source_file": "introclassJava.{}_{}_{}".format(project, child[0:8], subchild),
                     "source_directory": "src/main/java",
                     "class_directory": "target/classes",
                     "line_numbers": [],
@@ -40,7 +37,8 @@ for project in os.listdir("dataset"):
             )
             shutil.copytree(
                 join("dataset", project, child, subchild),
-                join("programs", short_name, subchild),
+                join(short_name, subchild),
+                dirs_exist_ok = True
             )
 
 x = open("meta-data.json", "w")
