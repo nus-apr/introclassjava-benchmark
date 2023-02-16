@@ -21,7 +21,9 @@ for project in os.listdir("dataset"):
                     "id": id,
                     "bug_id": subchild,
                     "subject": short_name,
-                    "source_file": "introclassJava.{}_{}_{}".format(project, child[0:8], subchild),
+                    "source_file": "introclassJava.{}_{}_{}".format(
+                        project, child[0:8], subchild
+                    ),
                     "source_directory": "src/main/java",
                     "class_directory": "target/classes",
                     "line_numbers": [],
@@ -38,7 +40,7 @@ for project in os.listdir("dataset"):
             shutil.copytree(
                 join("dataset", project, child, subchild),
                 join(short_name, subchild),
-                dirs_exist_ok = True
+                dirs_exist_ok=True,
             )
 
 x = open("meta-data.json", "w")
