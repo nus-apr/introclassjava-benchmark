@@ -30,6 +30,7 @@ for project in os.listdir("dataset"):
                     "dependencies": [],
                     "passing_test": [],
                     "failing_test": [],
+                    "language": "java",
                     "test_directory": "src/test/java",
                     "test_class_directory": "target/test-classes",
                     "count_pos": 0,
